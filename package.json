@@ -1,26 +1,30 @@
 {
-  "name": "bugtracker",
+  "name": "node-rest",
   "version": "1.0.0",
-  "description": "Used to track bugs and their current status.",
-  "main": "server/server.js",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "start": "nodemon server/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon server.js",
+    "test": "eslint api --ext .js --fix"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Abhipise/BugTracker.git"
-  },
-  "author": "Abhishek",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Abhipise/BugTracker/issues"
-  },
-  "homepage": "https://github.com/Abhipise/BugTracker#readme",
-  "devDependencies": {
-    "nodemon": "^2.0.4"
-  },
   "dependencies": {
-    "express": "^4.17.1"
+    "aws-sdk": "^2.739.0",
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.6.0",
+    "mongoose": "^5.10.0",
+    "morgan": "^1.9.0",
+    "multer": "^1.4.2",
+    "uuid": "^8.3.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.7.0",
+    "nodemon": "^2.0.4"
   }
 }
