@@ -6,9 +6,10 @@ const Company = require('../models/company/company');
 const Project = require('../models/projects/projects');
 
 router.post('/', (req, res, next) => {
+    console.log(req.body)
     Company.findById(req.body.id)
-    .then(comapny => {
-        if(!comapny){
+    .then(comapany => {
+        if(!comapany){
             return res.status(404).json({
                 message : "Company not found"
             })
@@ -34,7 +35,7 @@ router.get("/", (req,res,next)=> {
     
     });
 
-    router.get("/:id", (req,res,next)=> {
+router.get("/:id", (req,res,next)=> {
         const id = req.params.id;
         Project.findById(id).exec()
         .then(project => {
