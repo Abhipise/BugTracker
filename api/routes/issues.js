@@ -31,7 +31,6 @@ router.post('/', (req, res, next) => {
                     severity : req.body.severity,
                     assignedTo : req.body.assignedTo
                 });
-                console.log(issues,"lllll");
                 return issues.save()
                 .then(
                     result => {console.log(result),res.status(201).json(result)}
