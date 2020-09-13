@@ -1,10 +1,18 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const { body, validationResult } = require('express-validator');
+
 
 const Company = require('../models/company/company');
 
-router.post('/', (req, res, next) => {
+router.post('/',[
+        body('name').isString().withMessage('name of Company must br string')
+        ], (req, res, next) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+          return res.status(400).json({ errors: errors.array() });
+        }
         const company = new Company({
             _id : new mongoose.Types.ObjectId(),
             name : req.body.name,

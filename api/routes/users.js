@@ -3,11 +3,19 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
+const { body, validationResult } = require('express-validator');
 
 const User = require('../models/users/user');
 
-router.post('/signup', (req, res, next) => {
-    User.find({email : req.body.email})
+router.post('/signup',[
+    body('email').isEmail().withMessage('Please enter correct email id'),
+    body('name').isString().withMessage('Name should be string'),
+    body('password').isLength(5).withMessage('Length of password should be gratert than 5 ')
+    ], (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }    User.find({email : req.body.email})
     .exec()
     .then(user =>
         {
@@ -35,7 +43,6 @@ router.post('/signup', (req, res, next) => {
 })
 
 router.post('/login', (req, res, next) =>{
-    console.log(req.body.email,req.body.password);
     User.find({ email: req.body.email })
     .exec()
     .then( user => {
@@ -82,9 +89,9 @@ router.get("/", (req,res,next)=> {
     User.find()
     .then(result => {
         res.status(200).json(result);
-    })    .catch(err => {console.log(err),res.status(500).json({error:err})});
+    })
+    .catch(err => {console.log(err),res.status(500).json({error:err})});
 
 });
-
 
 module.exports = router;

@@ -1,12 +1,18 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const { body, validationResult } = require('express-validator');
 
 const Company = require('../models/company/company');
 const Project = require('../models/projects/projects');
 
-router.post('/', (req, res, next) => {
-    console.log(req.body)
+router.post('/',[
+    body('name').isString().withMessage('name of project must be string')
+    ], (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
     Company.findById(req.body.id)
     .then(comapany => {
         if(!comapany){

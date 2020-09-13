@@ -4,6 +4,7 @@ const morgan  = require('morgan');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require("mongoose");
+const expressValidator = require('express-validator');
 
 const companyRoutes = require('./api/routes/companies');
 const issuesRoutes = require('./api/routes/issues');

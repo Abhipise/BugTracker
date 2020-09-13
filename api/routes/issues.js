@@ -1,12 +1,21 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const { body, validationResult } = require('express-validator');
 
 const Project = require('../models/projects/projects');
 const User = require('../models/users/user');
 const Issues = require('../models/issues/issues');
 
-router.post('/', (req, res, next) => {
+router.post('/',[
+    body('name').isString().withMessage('name of issue must be string'),
+    body('title').isString().withMessage('title of issue should be string'),
+    body('taskNumber').isString().withMessage('type of issue should be number'),
+    ], (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
     Project.findById(req.body.projectId)
     .then(project => {
         if(!project){
