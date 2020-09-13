@@ -12,7 +12,7 @@ const projectRoute = require('./api/routes/projects');
 const orderRoutes = require('./api/routes/orders');
 const userRoutes = require('./api/routes/users');
 
-const uri = "mongodb://devadmin:Titandef#1@cluster0-shard-00-00.25old.mongodb.net:27017,cluster0-shard-00-01.25old.mongodb.net:27017,cluster0-shard-00-02.25old.mongodb.net:27017/Shop?ssl=true&replicaSet=atlas-m61i7o-shard-0&authSource=admin&retryWrites=true";
+// const uri = "mongodb://devadmin:Titandef#1@cluster0-shard-00-00.25old.mongodb.net:27017,cluster0-shard-00-01.25old.mongodb.net:27017,cluster0-shard-00-02.25old.mongodb.net:27017/Shop?ssl=true&replicaSet=atlas-m61i7o-shard-0&authSource=admin&retryWrites=true";
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended : false}))
@@ -36,7 +36,6 @@ mongoose.connect( process.env.databaseLink,  //|| "mongodb://localhost:27017/Sho
     }
   );
 mongoose.Promise = global.Promise;
-
 
 app.use((req, res, next) => {
     const error = new Error('Not Found');

@@ -58,4 +58,15 @@ router.post('/', (req, res, next) => {
         .catch(err => {console.log(err),res.status(500).json({error:err})});
     });
 
+    router.put('/:id', (req,res,next)=> {
+        const id = req.params.id;
+        Issues.findById(id)
+        .then( result => {
+                result = Object.assign(result, req.body);
+                result.save()
+                console.log(result),res.status(200).json(result)
+        })
+        .catch(err => res.status(500).json({error:"Issue not created 1"}))
+    });
+
 module.exports = router;
