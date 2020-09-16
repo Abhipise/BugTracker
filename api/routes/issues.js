@@ -69,13 +69,13 @@ router.post('/',[
 
     router.put('/:id', (req,res,next)=> {
         const id = req.params.id;
-        Issues.findById(id)
+        let issue = Issues.findByIdAndUpdate({_id:id}, req.body)
         .then( result => {
-                result = Object.assign(result, req.body);
-                result.save()
+                // result = Object.assign(result, req.body);
+                issue.save()
                 console.log(result),res.status(200).json(result)
         })
-        .catch(err => res.status(500).json({error:"Issue not created 1"}))
+        .catch(err => res.status(500).json({error:"Issue not updated 1"}))
     });
 
 module.exports = router;
