@@ -69,9 +69,9 @@ router.post('/',[
 
     router.put('/:id', (req,res,next)=> {
         const id = req.params.id;
-        let issue = Issues.findByIdAndUpdate({_id:id}, req.body)
+        let issue = Issues.findOne({_id:id})
         .then( result => {
-                // result = Object.assign(result, req.body);
+                issue = Object.assign(result, req.body);
                 issue.save()
                 console.log(result),res.status(200).json(result)
         })
